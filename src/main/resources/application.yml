@@ -1,0 +1,28 @@
+
+
+spring:
+  kafka:
+    client-id: ${kafka.stream-app-prefix}.client-group
+    consumer:
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+      auto-commit-interval: 100
+      group-id: ${kafka.stream-app-prefix}.consumer-group
+    streams:
+      application-id: ${kafka.stream-app-prefix}.stream-app
+      properties:
+        commit.interval.ms: 100
+    listener:
+      poll-timeout: 5000
+      idle-event-interval: 1000
+      concurrency: 5
+
+kafka:
+  stream-app-prefix: product-conversion-demo
+  bootstrapAddress: localhost:29092
+  topic:
+    productConversion: product-conversion
+    orderEvent: order-event
+    aggregatedOrderEvent: aggregated-order-event
+server:
+  port: 8085
